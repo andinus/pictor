@@ -3,11 +3,12 @@
 #+EXPORT_FILE_NAME: index
 #+TITLE: Pictor
 
-Pictor is a simple acronym expander.
+Pictor is a simple acronym expander. It's based on =wtf= program from
+/NetBSD 1.5/.
 
-| Project Home    | [[https://andinus.nand.sh/pictor/][Pictor]] |
+| Project Home    | [[https://andinus.nand.sh/pictor/][Pictor]]           |
 | Source Code     | [[https://git.tilde.institute/andinus/pictor/][Andinus / Pictor]] |
-| GitHub (Mirror) | [[https://github.com/andinus/pictor/][Pictor - GitHub]] |
+| GitHub (Mirror) | [[https://github.com/andinus/pictor/][Pictor - GitHub]]  |
 
 *Tested on*:
 - OpenBSD 6.6
