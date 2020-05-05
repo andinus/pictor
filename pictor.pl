@@ -28,8 +28,8 @@ my @files = (
     );
 
 # Unveil each file with only read permission.
-foreach my $file (@files) {
-    unveil( $file, "r" ) or
+foreach my $fn (@files) {
+    unveil( $fn, "r" ) or
     	die "Unable to unveil: $!";
 }
 
@@ -42,12 +42,12 @@ pledge( qw( rpath )) or
     die "Unable to pledge: $!";
 
 # Search for acronym in every file.
-foreach my $file (@files) {
-    open my $fh, '<', $file or
+foreach my $fn (@files) {
+    open my $fh, '<', $fn or
 	# The program should continue if the file doesn't exist but
 	# warn the user about it.
 	do {
-	    warn "Unable to open $file: $!";
+	    warn "Unable to open $fn: $!";
 	    next;
     };
 
