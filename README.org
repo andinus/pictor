@@ -1,0 +1,14 @@
+#+HTML_HEAD: <link rel="stylesheet" href="../static/style.css">
+#+HTML_HEAD: <link rel="icon" href="../static/pictor.png" type="image/png">
+#+EXPORT_FILE_NAME: index
+#+TITLE: Pictor
+
+Pictor is a simple acronym expander.
+
+| Project Home    | [[https://andinus.nand.sh/pictor/][Pictor]] |
+| Source Code     | [[https://git.tilde.institute/andinus/pictor/][Andinus / Pictor]] |
+| GitHub (Mirror) | [[https://github.com/andinus/pictor/][Pictor - GitHub]] |
+
+*Tested on*:
+- OpenBSD 6.6
+  - Perl v5.28
