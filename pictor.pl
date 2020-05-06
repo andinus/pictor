@@ -53,9 +53,11 @@ foreach my $fn (@files) {
 
     while (my $line = readline $fh) {
 	# \Q is quotemeta, \E terminates it because otherwise it would
-	# mess with \s. This regex matches when $line starts with
-	# "$term\s", \s being any kind of whitespace.
-	print $line if ($line =~ /^\Q${term}\E\s/i);
+	# mess with \t. This regex matches when $line starts with
+	# "$term\t". We replace \t with ": " before printing to make
+	# the input neat.
+	print $line =~ s/\t/: /r if
+	    ($line =~ /^\Q${term}\E\t/i);
     }
 }
 
