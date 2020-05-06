@@ -18,6 +18,12 @@ if (@ARGV < 1) {
     exit 1;
 } else {
     $term = $ARGV[0];
+
+    # User can rename this program to "wtf" & run "wtf is wtf" too
+    # instead of "wtf wtf" or "pictor wtf", "wtf is term" looks
+    # better.
+    $term = $ARGV[1] if
+	($ARGV[0] eq "is")
 }
 
 # files contains list of all files to search for acronyms.
