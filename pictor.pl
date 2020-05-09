@@ -36,7 +36,7 @@ my @files = (
 # Unveil each file with only read permission.
 foreach my $fn (@files) {
     unveil( $fn, "r" ) or
-    	die "Unable to unveil: $!";
+        die "Unable to unveil: $!";
 }
 
 # Block further unveil calls.
@@ -53,22 +53,22 @@ my $total_acronyms = 0;
 # Search for acronym in every file.
 foreach my $fn (@files) {
     open my $fh, '<', $fn or
-	# The program should continue if the file doesn't exist but
-	# warn the user about it.
-	do {
-	    warn "Unable to open $fn: $!\n";
-	    next;
+        # The program should continue if the file doesn't exist but
+        # warn the user about it.
+        do {
+            warn "Unable to open $fn: $!\n";
+            next;
     };
 
     while (my $line = readline $fh) {
-	# \Q is quotemeta, \E terminates it because otherwise it would
-	# mess with \t. This regex matches when $line starts with
-	# "$term\t". We replace \t with ": " before printing to make
-	# the input neat.
-	if ($line =~ /^\Q${term}\E\t/i) {
-	    print $line =~ s/\t/: /r;
-	    $total_acronyms++;
-	}
+        # \Q is quotemeta, \E terminates it because otherwise it would
+        # mess with \t. This regex matches when $line starts with
+        # "$term\t". We replace \t with ": " before printing to make
+        # the input neat.
+        if ($line =~ /^\Q${term}\E\t/i) {
+            print $line =~ s/\t/: /r;
+            $total_acronyms++;
+        }
     }
 }
 
