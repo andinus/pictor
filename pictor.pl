@@ -47,6 +47,9 @@ unveil() or
 pledge( qw( rpath )) or
     die "Unable to pledge: $!";
 
+# $total_acronyms will hold the total number of acronyms we find.
+my $total_acronyms = 0;
+
 # Search for acronym in every file.
 foreach my $fn (@files) {
     open my $fh, '<', $fn or
@@ -62,11 +65,16 @@ foreach my $fn (@files) {
 	# mess with \t. This regex matches when $line starts with
 	# "$term\t". We replace \t with ": " before printing to make
 	# the input neat.
-	print $line =~ s/\t/: /r if
+	print $line =~ s/\t/: /r and
+	    $total_acronyms++ if
 	    ($line =~ /^\Q${term}\E\t/i);
     }
 }
 
-# drop pledge permissions
+# Print an error message if we don't find any match.
+say STDERR "I don't know what '$term' means!" and
+    exit 1 unless
+    $total_acronyms;
+
 pledge() or
     die "Unable to pledge: $!";
