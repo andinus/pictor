@@ -76,7 +76,7 @@ foreach my $fn (@files) {
 pledge( qw( stdio ) ) or
     die "Unable to pledge: $!";
 
-# Die if we don't find any match.
+# die if no match is found.
 die "I don't know what '$term' means!\n" unless
     $total_acronyms;
 

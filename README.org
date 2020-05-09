@@ -13,3 +13,7 @@ Pictor is a simple acronym expander. It's based on =wtf= program from
 *Tested on*:
 - OpenBSD 6.6
   - Perl v5.28
+
+*Note*: This program will only run on /OpenBSD/ because =OpenBSD::Pledge= &
+=OpenBSD::Unveil= is used, to run it on other systems remove =pledge= &
+=unveil= from the program.
