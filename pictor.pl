@@ -6,7 +6,8 @@ use feature 'say';
 use OpenBSD::Pledge;
 use OpenBSD::Unveil;
 
-pledge( qw( rpath unveil ) ) or
+# Inititalize pledge.
+pledge( qw( stdio rpath unveil ) ) or
     die "Unable to pledge: $!";
 
 # $term will store the user input.
@@ -43,8 +44,8 @@ foreach my $fn (@files) {
 unveil() or
     die "Unable to lock unveil: $!";
 
-# drop pledge permissions
-pledge( qw( rpath )) or
+# Drop unveil permission.
+pledge( qw( stdio rpath ) ) or
     die "Unable to pledge: $!";
 
 # $total_acronyms will hold the total number of acronyms we find.
@@ -71,10 +72,15 @@ foreach my $fn (@files) {
     }
 }
 
+# Drop rpath permission.
+pledge( qw( stdio ) ) or
+    die "Unable to pledge: $!";
+
 # Print an error message if we don't find any match.
 say STDERR "I don't know what '$term' means!" and
     exit 1 unless
     $total_acronyms;
 
+# Drop pledge permissions.
 pledge() or
     die "Unable to pledge: $!";
