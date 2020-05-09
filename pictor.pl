@@ -14,18 +14,17 @@ pledge( qw( stdio rpath unveil ) ) or
 my $term;
 
 # User must pass at least one argument.
-if (@ARGV < 1) {
-    say STDERR "usage: wtf.pl term";
-    exit 1;
-} else {
-    $term = $ARGV[0];
+die "usage: pictor term\n" if
+    @ARGV < 1;
 
-    # User can rename this program to "wtf" & run "wtf is wtf" too
-    # instead of "wtf wtf" or "pictor wtf", "wtf is term" looks
-    # better.
-    $term = $ARGV[1] if
-	($ARGV[0] eq "is")
-}
+# Assume first argument to be term.
+$term = $ARGV[0];
+
+# User can rename this program to "wtf" & run "wtf is wtf" instead of
+# "wtf wtf", "wtf is term" looks better so we use $ARGV[1] as $term if
+# $ARGV[0] is "is".
+$term = $ARGV[1] if
+    $ARGV[0] eq "is";
 
 # files contains list of all files to search for acronyms.
 my @files = (
@@ -57,7 +56,7 @@ foreach my $fn (@files) {
 	# The program should continue if the file doesn't exist but
 	# warn the user about it.
 	do {
-	    warn "Unable to open $fn: $!";
+	    warn "Unable to open $fn: $!\n";
 	    next;
     };
 
@@ -66,9 +65,10 @@ foreach my $fn (@files) {
 	# mess with \t. This regex matches when $line starts with
 	# "$term\t". We replace \t with ": " before printing to make
 	# the input neat.
-	print $line =~ s/\t/: /r and
-	    $total_acronyms++ if
-	    ($line =~ /^\Q${term}\E\t/i);
+	if ($line =~ /^\Q${term}\E\t/i) {
+	    print $line =~ s/\t/: /r;
+	    $total_acronyms++;
+	}
     }
 }
 
@@ -76,9 +76,8 @@ foreach my $fn (@files) {
 pledge( qw( stdio ) ) or
     die "Unable to pledge: $!";
 
-# Print an error message if we don't find any match.
-say STDERR "I don't know what '$term' means!" and
-    exit 1 unless
+# Die if we don't find any match.
+die "I don't know what '$term' means!\n" unless
     $total_acronyms;
 
 # Drop pledge permissions.
