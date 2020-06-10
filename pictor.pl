@@ -2,7 +2,6 @@
 
 use strict;
 use warnings;
-use feature 'say';
 
 use constant is_OpenBSD => $^O eq "openbsd";
 if (is_OpenBSD) {
