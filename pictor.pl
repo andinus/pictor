@@ -19,21 +19,11 @@ if (is_OpenBSD) {
 pledge( qw( stdio rpath unveil ) )
     or die "Unable to pledge: $!";
 
-# $term will store the user input.
-my $term;
-
 # User must pass at least one argument.
 die "usage: pictor term\n"
     if @ARGV < 1;
 
-# Assume first argument to be term.
-$term = $ARGV[0];
-
-# User can rename this program to "wtf" & run "wtf is wtf" instead of
-# "wtf wtf", "wtf is term" looks better so we use $ARGV[1] as $term if
-# $ARGV[0] is "is".
-$term = $ARGV[1]
-    if $ARGV[0] eq "is";
+my $term = $ARGV[0];
 
 # files contains list of all files to search for acronyms.
 my @files = (
