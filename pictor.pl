@@ -21,9 +21,15 @@ pledge( qw( stdio rpath unveil ) )
 
 # User must pass at least one argument.
 die "usage: pictor term\n"
-    if @ARGV < 1;
+    unless @ARGV > 0;
 
 my $term = $ARGV[0];
+
+# Ignore "is" operand if it's passed.
+if ( $ARGV[0] eq "is"
+         and @ARGV > 1 ) {
+    $term = $ARGV[1];
+}
 
 # files contains list of all files to search for acronyms.
 my @files = (
