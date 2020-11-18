@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 
+# Use pledge(2) & unveil(2) on OpenBSD.
 use constant is_OpenBSD => $^O eq "openbsd";
 if (is_OpenBSD) {
     require OpenBSD::Unveil;
@@ -20,8 +21,7 @@ pledge( qw( stdio rpath unveil ) )
     or die "Unable to pledge: $!";
 
 # User must pass at least one argument.
-die "usage: pictor term\n"
-    unless @ARGV > 0;
+die "usage: pictor <term>\n" unless @ARGV > 0;
 
 my $term = $ARGV[0];
 
@@ -31,7 +31,7 @@ if ( $ARGV[0] eq "is"
     $term = $ARGV[1];
 }
 
-# files contains list of all files to search for acronyms.
+# @files contains list of all files to search for acronyms.
 my @files = (
     '/usr/local/share/misc/acronyms',
     '/usr/local/share/misc/acronyms-o',
@@ -57,10 +57,10 @@ my $total_acronyms = 0;
 
 # Search for acronym in every file.
 foreach my $fn (@files) {
-    open my $fh, '<', $fn or
+    open my $fh, '<', $fn
         # The program should continue if the file doesn't exist but
         # warn the user about it.
-        do {
+        or do {
             warn "Unable to open $fn: $!\n";
             next;
         };

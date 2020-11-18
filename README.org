@@ -1,5 +1,4 @@
-#+HTML_HEAD: <link rel="stylesheet" href="../static/style.css">
-#+HTML_HEAD: <link rel="icon" href="../static/pictor.png" type="image/png">
+#+SETUPFILE: ~/.emacs.d/org-templates/projects.org
 #+EXPORT_FILE_NAME: index
 #+TITLE: Pictor
 
@@ -11,10 +10,19 @@ Pictor is a simple acronym expander. It's based on =wtf= program from
 | GitHub (Mirror) | [[https://github.com/andinus/pictor/][Pictor - GitHub]]  |
 
 *Tested on*:
-- OpenBSD 6.6
-  - Perl v5.28
-- OpenBSD 6.7
-  - Perl v5.30.2
+- OpenBSD 6.6 (Perl v5.28)
+- OpenBSD 6.7 (Perl v5.30.2)
+- OpenBSD 6.8 (Perl v5.30.3)
 
 *Note* (OpenBSD users): If you're using a custom Perl install then add the
 path to =OpenBSD::= in @INC.
+
+* Installation
+#+BEGIN_SRC sh
+# Clone the project.
+git clone https://git.tilde.institute/andinus/pictor
+cd pictor
+
+# Install.
+sudo make install
+#+END_SRC

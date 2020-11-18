@@ -1,0 +1,37 @@
+.Dd $Mdocdate: November 23 2020 $
+.Dt PICTOR 6
+.Os
+.Sh NAME
+.Nm pictor
+.Nd a simple acronym expander
+.Sh SYNOPSIS
+.Nm pictor
+.Op Ar is
+.Ar <term>
+.Sh DESCRIPTION
+.Nm
+is a simple acronym expander. It's based on
+.Ar wtf
+program from
+.Ar NetBSD 1.5.
+.Pp
+.Sh FILES
+.Bl -tag -width /usr/local/share/misc/acronyms.XXXX -compact
+.It Pa /usr/local/share/misc/acronyms
+default acronym database.
+.It Pa /usr/local/share/misc/acronyms-o
+default offensive acronym database.
+.It Pa /usr/local/share/misc/acronyms.comp
+default computer-related acronym database.
+.El
+.Sh SEE ALSO
+.Xr wtf 6
+.Pp
+.Sh BUGS
+On OpenBSD: If you're using a custom Perl install then add the path to
+.Ar OpenBSD::Unveil & OpenBSD::Pledge
+to
+.Ar @INC.
+.Pp
+.Sh AUTHOR
+.An Andinus Aq Mt andinus@nand.sh
